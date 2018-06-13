@@ -16,10 +16,12 @@ app.get('/', (req, res) => {
 
 app.post('/wall', jsonParser, function (req, res) {
     if (!req.body) return res.sendStatus(400);
-    res.sendStatus(200);
-    res.send('ok');
+
     //console.log(`This it -> ${req.type} `);
     process.stdout(`This it -> ${req.type} `);
+
+    res.sendStatus(200);
+    res.send('ok');
 });
 
 app.listen(PORT, (err) => {
