@@ -18,7 +18,7 @@ app.post('/wall', jsonParser, function (req, res) {
     if (!req.body) return res.sendStatus(400);
 
     //console.log(`This it -> ${req.type} `);
-    console.log(`This it -> ${req.type} `);
+    console.log(`This it -> ${req.body.type} `);
 
     res.sendStatus(200);
     res.send('ok');
