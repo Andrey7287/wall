@@ -7,7 +7,7 @@ const app = require('express')(),
 //     res.send('Hello from Express!')
 // });
 
-app.post('*', (req, res) => '8ee1117a');
+app.post('/wall', (req, res) => '8ee1117a');
 
 app.listen(PORT, (err) => {
     if (err) {
