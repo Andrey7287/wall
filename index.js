@@ -18,8 +18,8 @@ app.post('/wall', jsonParser, function (req, res) {
     if (!req.body) return res.sendStatus(400);
     res.sendStatus(200);
     res.send('ok');
-    console.log(`This it -> ${req.type} `);
-
+    //console.log(`This it -> ${req.type} `);
+    process.stdout(`This it -> ${req.type} `);
 });
 
 app.listen(PORT, (err) => {
@@ -29,3 +29,16 @@ app.listen(PORT, (err) => {
 
     console.log(`server is listening on ${PORT}`)
 });
+
+var r = {
+    "type": "wall_reply_new",
+    "object": {
+        "id": 2,
+        "from_id": 457838735,
+        "date": 1528898753,
+        "text": "khjkhjkhj",
+        "post_owner_id": -167677639,
+        "post_id": 1
+    },
+    "group_id": 167677639
+}
