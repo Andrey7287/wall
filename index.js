@@ -1,8 +1,8 @@
 //require('./app/index');
 
 const app = require('express')(),
-      PORT = process.env.PORT || 5000,
-      jsonParser = require('body-parser').json();
+    PORT = process.env.PORT || 5000,
+    jsonParser = require('body-parser').json();
 
 
 app.get('/', (req, res) => {
@@ -15,8 +15,11 @@ app.get('/', (req, res) => {
 
 
 app.post('/wall', jsonParser, function (req, res) {
-    if (!req.body) return res.sendStatus(400)
-    res.send(`This it -> ${res.type} `);
+    if (!req.body) return res.sendStatus(400);
+    res.sendStatus(200);
+    res.send('ok');
+    console.log(`This it -> ${req.type} `);
+
 });
 
 app.listen(PORT, (err) => {
@@ -26,4 +29,3 @@ app.listen(PORT, (err) => {
 
     console.log(`server is listening on ${PORT}`)
 });
-
