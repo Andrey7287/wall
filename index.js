@@ -52,8 +52,9 @@ app.post('/wall', function (req, res) {
     if (!req.body) return res.sendStatus(400);
 
     //console.log(`This it -> ${req.type} `);
+    console.log('USER ID IS:', req.body.object.from_id);
     https.get(`${apiUrl}users.get?user_ids=${req.body.object.from_id}&fields=photo_max_orig&v=5.50`, (res) => {
-        console.log(res.response.photo_max_orig);
+        console.log(res);
     });
 
     //console.log(`This it -> ${req.body.type} `);
