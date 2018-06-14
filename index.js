@@ -5,7 +5,7 @@ const app = require('express')(),
     https = require('https');
 
 
-app.use(bodyParser.json());
+app.use(require('body-parser').json());
 
 app.get('/', (req, res) => {
     res.send('Hello from Express!');
