@@ -55,6 +55,11 @@ app.post('/wall', function (req, res) {
     console.log('USER ID IS:', req.body.object.from_id);
     https.get(`${apiUrl}users.get?user_ids=${req.body.object.from_id}&fields=photo_max_orig&v=5.50`, (res) => {
         console.log(res);
+        res.on('data', (d) => {
+            const data =  JSON.parse(d.toString()),
+                  userPic = d.response.photo_max_orig;
+            console.log(userPic);
+        });
     });
 
     //console.log(`This it -> ${req.body.type} `);
