@@ -2,9 +2,10 @@
 
 const app = require('express')(),
     PORT = process.env.PORT || 5000,
-    jsonParser = require('body-parser').json(),
     https = require('https');
 
+
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
     res.send('Hello from Express!');
@@ -28,7 +29,7 @@ https.get('https://api.vk.com/method/photos.getOwnerCoverPhotoUploadServer?group
 });
 
 
-app.post('/wall', jsonParser, function (req, res) {
+app.post('/wall', function (req, res) {
     if (!req.body) return res.sendStatus(400);
 
     //console.log(`This it -> ${req.type} `);
