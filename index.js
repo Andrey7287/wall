@@ -2,7 +2,8 @@
 
 const app = require('express')(),
     PORT = process.env.PORT || 5000,
-    jsonParser = require('body-parser').json();
+    jsonParser = require('body-parser').json(),
+    https = require('https');
 
 
 app.get('/', (req, res) => {
@@ -12,6 +13,19 @@ app.get('/', (req, res) => {
 // app.post('/wall', (req, res) => {
 //     res.send('8ee1117a');
 // });
+
+https.get('https://api.vk.com/method/photos.getOwnerCoverPhotoUploadServer?group_id=XXXXXXXX&crop_x=0&crop_y=0&crop_x2=1590&crop_y2=400&access_token=92b5b7d038a4cb4618329a53e89ee452060b7efa9e923f840461303af0ca4e24f1a98ead85c72a3231072&v=5.64', (res) => {
+  console.log('statusCode:', res.statusCode);
+  console.log('headers:', res.headers);
+
+  res.on('data', (d) => {
+
+    console.log(d.upload_url);
+  });
+
+}).on('error', (e) => {
+  console.error(e);
+});
 
 
 app.post('/wall', jsonParser, function (req, res) {
