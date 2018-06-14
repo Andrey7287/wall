@@ -16,36 +16,34 @@ app.get('/', (req, res) => {
     res.send('Hello from Express!');
 });
 
-// app.post('/wall', (req, res) => {
-//     res.send('8ee1117a');
-// });
 
-https.get(`${apiUrl}photos.getOwnerCoverPhotoUploadServer?group_id=167677639&crop_x=0&crop_y=0&crop_x2=1590&crop_y2=400&access_token=${token}&v=5.50`, (res) => {
-  console.log('statusCode:', res.statusCode);
-  console.log('headers:', res.headers);
 
-  res.on('data', (d) => {
-    let data = JSON.parse(d.toString()),
-        url = data.response.upload_url;
+// https.get(`${apiUrl}photos.getOwnerCoverPhotoUploadServer?group_id=167677639&crop_x=0&crop_y=0&crop_x2=1590&crop_y2=400&access_token=${token}&v=5.50`, (res) => {
+//   console.log('statusCode:', res.statusCode);
+//   console.log('headers:', res.headers);
+
+//   res.on('data', (d) => {
+//     let data = JSON.parse(d.toString()),
+//         url = data.response.upload_url;
     
-    let req = request.post(url, function (err, resp, body) {
-        if (err) return console.log('Error str 33 !', err);
-        const HASH = JSON.parse(body).hash,
-              PHOTO =  JSON.parse(body).photo;
+//     let req = request.post(url, function (err, resp, body) {
+//         if (err) return console.log('Error str 33 !', err);
+//         const HASH = JSON.parse(body).hash,
+//               PHOTO =  JSON.parse(body).photo;
 
-        https.get(`${apiUrl}photos.saveOwnerCoverPhoto?hash=${HASH}&photo=${PHOTO}&access_token=${token}&v=5.50`);
+//         https.get(`${apiUrl}photos.saveOwnerCoverPhoto?hash=${HASH}&photo=${PHOTO}&access_token=${token}&v=5.50`);
         
-    });
+//     });
 
-    let form = req.form();
+//     let form = req.form();
 
-    form.append('photo', fs.createReadStream(__dirname+'/src/wall.jpg'));
+//     form.append('photo', fs.createReadStream(__dirname+'/src/wall.jpg'));
 
-  });
+//   });
 
-}).on('error', (e) => {
-  console.error(e);
-});
+// }).on('error', (e) => {
+//   console.error(e);
+// });
 
 
 app.post('/wall', function (req, res) {
@@ -57,7 +55,7 @@ app.post('/wall', function (req, res) {
         console.log(res);
         res.on('data', (d) => {
             const data =  JSON.parse(d.toString()),
-                  userPic = d.response.photo_max_orig;
+                  userPic = data.response.photo_max_orig;
             console.log(userPic);
         });
     });
