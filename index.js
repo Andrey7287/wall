@@ -20,7 +20,7 @@ https.get('https://api.vk.com/method/photos.getOwnerCoverPhotoUploadServer?group
 
   res.on('data', (d) => {
 
-    console.log(d.upload_url);
+    console.log('response ===>', d);
   });
 
 }).on('error', (e) => {
