@@ -50,9 +50,9 @@ app.post('/wall', function (req, res) {
     if (!req.body) return res.sendStatus(400);
 
     //console.log(`This it -> ${req.type} `);
-    console.log('USER ID IS:', req.body.object.from_id);
-    https.get(`${apiUrl}users.get?user_ids=${req.body.object.from_id}&fields=photo_max_orig&v=5.50`, (res) => {
-        console.log(res);
+
+    https.get(`${apiUrl}users.get?user_ids=${req.body.object.from_id}&fields=photo_max_orig&access_token=${token}&v=5.50`, (res) => {
+
         res.on('data', (d) => {
             const data =  JSON.parse(d.toString()),
                   userPic = data.response.photo_max_orig;
@@ -67,6 +67,19 @@ app.post('/wall', function (req, res) {
 
 
 });
+
+
+
+//test start
+https.get(`${apiUrl}users.get?user_ids=457838735&fields=photo_max_orig&access_token=${token}&v=5.50`, (res) => {
+
+    res.on('data', (d) => {
+        const data =  JSON.parse(d.toString()),
+              userPic = 1;//data.response.photo_max_orig;
+        console.log(data);
+    });
+});
+//test end
 
 app.listen(PORT, (err) => {
     if (err) {
