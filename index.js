@@ -25,14 +25,14 @@ app.get('/', (req, res) => {
 //   res.on('data', (d) => {
 //     let data = JSON.parse(d.toString()),
 //         url = data.response.upload_url;
-    
+
 //     let req = request.post(url, function (err, resp, body) {
 //         if (err) return console.log('Error str 33 !', err);
 //         const HASH = JSON.parse(body).hash,
 //               PHOTO =  JSON.parse(body).photo;
 
 //         https.get(`${apiUrl}photos.saveOwnerCoverPhoto?hash=${HASH}&photo=${PHOTO}&access_token=${token}&v=5.50`);
-        
+
 //     });
 
 //     let form = req.form();
@@ -54,8 +54,8 @@ app.post('/wall', function (req, res) {
     https.get(`${apiUrl}users.get?user_ids=${req.body.object.from_id}&fields=photo_max_orig&access_token=${token}&v=5.50`, (res) => {
 
         res.on('data', (d) => {
-            const data =  JSON.parse(d.toString()),
-                  userPic = data.response.photo_max_orig;
+            const data = JSON.parse(d.toString()),
+                userPic = data.response.photo_max_orig;
             console.log(userPic);
         });
     });
@@ -71,22 +71,38 @@ app.post('/wall', function (req, res) {
 
 
 //test start
-https.get(`${apiUrl}users.get?user_ids=457838735&fields=photo_max_orig&access_token=${token}&v=5.50`, (res) => {
+// https.get(`${apiUrl}users.get?user_ids=457838735&fields=photo_max_orig&access_token=${token}&v=5.50`, (res) => {
 
-    res.on('data', (d) => {
-        const data =  JSON.parse(d.toString()),
-              userPic = 1;//data.response.photo_max_orig;
-        console.log(data);
-    });
-});
+//     res.on('data', (d) => {
+//         const data =  JSON.parse(d.toString()),
+//               userPic = 1;//data.response.photo_max_orig;
+//         console.log(data);
+//     });
+// });
 //test end
+
+// test gm start
+// annotate an image
+gm(795, 200, "#ddff99f3")
+    .in(__dirname + '/src/wall.png')
+    .in(__dirname + '/src/ava.jpg')
+    .compose('Multiply')
+    .write(__dirname + '/src/test.png', function (err) {
+        if (err) console.error(err);
+        console.log('done');
+    });
+
+
+
+// test gm end
 
 app.listen(PORT, (err) => {
     if (err) {
         return console.log('something bad happened')
     }
 
-    console.log(`server is listening on ${PORT}`)
+    console.log(`server is listening on ${PORT}`);
+
 });
 
 // var r = {
